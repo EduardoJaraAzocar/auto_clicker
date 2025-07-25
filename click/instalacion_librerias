@@ -1,0 +1,4 @@
+import os
+
+os.system("py -m pip install pynput")
+os.system("py -m pip install Tkinter")
