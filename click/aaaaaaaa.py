@@ -3,23 +3,23 @@ import threading
 from pynput.mouse import Controller, Button
 from pynput.keyboard import Listener, KeyCode
 
-TOGLE_KEY=  KeyCode(char='t')
+tecla_del_sistema=  KeyCode(char='t')
 clicking=False
-mause= Controller()
+controlador_raton= Controller()
 
-def clicker():
+def click_isquierdo():
     while True:
         if clicking:
-            mause.click(Button.left,1)
+            controlador_raton.click(Button.left,1)
         time.sleep(0.001)
 
-def toggle_event(key):
-    if key== TOGLE_KEY:
+def evento_al_pulsar(llave):
+    if llave== tecla_del_sistema:
         global clicking
         clicking=not clicking
 
-click_thread=threading.Thread(target=clicker)
-click_thread.start()
+monitor_de_tareas=threading.Thread(target=click_isquierdo)
+monitor_de_tareas.start()
 
-with Listener(on_press=toggle_event) as listener:
+with Listener(on_press=evento_al_pulsar) as listener:
     listener.join()
